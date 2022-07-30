@@ -4,8 +4,8 @@ title = "The CacheLib Caching Engine: Design and Experiences at Scale"
 description = "USENIX OSDI 2020" 
 tags = [ 
     "paper",
-    "NoSQL",
-    "AWS", 
+    "Facebook",
+    "caching", 
 ] 
 date = "2022-07-29" 
 +++
