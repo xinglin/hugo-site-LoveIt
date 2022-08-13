@@ -8,3 +8,6 @@ fi
 git add .
 git commit -m "$msg"
 git push origin master
+
+# deploy
+./deploy.sh "$msg"
