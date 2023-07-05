@@ -17,7 +17,7 @@ set _allowCoreThreadTimeOut_ to true (default is false). So,
 that core thread will be kept running, even when the main thread exits!
 Then, the JVM process won't exit, because there is still one thread running!
 Even when we shut down the executorService in _.close()_ method of that class,
-the same issue persists. The issue is _.close_ method of a Closable
+the same issue persists. The issue is _.close()_ method of a Closable
 object is called by Java garbage collector _only_ when it is reclaiming
 that object. This does not happen immediately when there is
 no reference to an object. After an object becomes orphan (no 
@@ -28,7 +28,7 @@ programmers on when the garbage collector will reclaim an object.
 
 The following code is an example.
 
-```
+```java
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.Date;
@@ -83,9 +83,9 @@ public class ExecutorServiceCoreThreadIdleTimeoutTest implements Closeable {
   }
 }
 ```
-- When we comment out `pool.allowCoreThreadTimeOut(true);`, the core 
+- When we comment out line 17 `pool.allowCoreThreadTimeOut(true);`, the core 
 thread will be kept running and the JVM process kept running, though the main thread exits.
-```
+```bash
 Mon Jul 03 15:42:50 PDT 2023: Main thread started
 Mon Jul 03 15:42:50 PDT 2023: task is running
 Mon Jul 03 15:42:51 PDT 2023: Main thread exited
@@ -97,7 +97,7 @@ waiting for new tasks to execute.
 will be running idle for 10 seconds before terminating. After that,
 the JVM process also exited. Please note the `Process finished with exit code 0`
 message at the end.
-```
+```bash
 Mon Jul 03 15:43:43 PDT 2023: Main thread started
 Mon Jul 03 15:43:43 PDT 2023: task is running
 Mon Jul 03 15:43:44 PDT 2023: Main thread exited
