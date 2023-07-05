@@ -1,3 +1,21 @@
+# How to Use it?
+
+```bash
+git clone git@github.com:xinglin/hugo-site-LoveIt.git
+
+cd hugo-site-LoveIt/exampleSite/
+rm -rf public
+git clone git@github.com:xinglin/xinglin.github.io.git
+mv xinglin.github.io public
+
+% make changes. 
+% e.g., add a new post into ./content/posts/
+
+./commit.sh "Added a new post"
+
+```
+
+
 # LoveIt Theme | Hugo [![Netlify Status](https://api.netlify.com/api/v1/badges/e60303f2-862c-4342-bf59-7c9adb10812e/deploy-status)](https://app.netlify.com/sites/hugo-loveit/deploys)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
