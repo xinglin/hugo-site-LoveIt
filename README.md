@@ -9,9 +9,9 @@ git clone git@github.com:xinglin/xinglin.github.io.git
 mv xinglin.github.io public
 
 % make changes. 
-% e.g., add a new post into ./content/posts/
+% e.g., add a new post into exampleSite/content/posts/
 
-./commit.sh "Added a new post"
+exampleSite/commit.sh "Added a new post"
 
 ```
 
