@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-	<meta name="generator" content="Hugo 0.99.1" />
+	<meta name="generator" content="Hugo 0.120.4">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
@@ -106,6 +106,11 @@
         alt="/images/head.jpg"
         title="/images/head.jpg" width="2495" height="2358" /></a></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/namenoderpctimebreakdown/">HDFS Namenode RPC Request Execution Time Breakdown</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-29">2023-11-29</time></span></div><div class="content">1 2 3 ----- enqueueTime queueingTime Processing/ResponseTime/HandlerTime |50090| &lt;- Listener --&gt; pendingConnections &lt;- Reader1 -----------&gt; CallQueue &lt;----- handler (processes and sends response) ----- \-&gt; pendingConnections &lt;- Reader2 A main listener thread is accepting new connections from clients and put connections into pendingConnections queue of a Reader thread. A Reader thread detects any ready connection, reads the request and puts the call into CallQueue. This put() operation is blocking and is accounted as enqueueTime.</div><div class="post-footer">
+        <a href="/namenoderpctimebreakdown/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/sourcecode/">sourcecode</a>,&nbsp;<a href="/tags/hdfs/">HDFS</a>,&nbsp;<a href="/tags/hadoop/">Hadoop</a>,&nbsp;<a href="/tags/note/">note</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/java-executorservice/">Java ExecutorService</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-03">2023-07-03</time></span></div><div class="content">Recently, I was working on HDFS-17030 and used ExecutorService for multi-threading execution. We hit a non-intuitive `bug` of how JVM/garbage collector works. The issue is as following.
 We created an executorService with 1 core thread in a class. We did not set allowCoreThreadTimeOut to true (default is false). So, that core thread will be kept running, even when the main thread exits! Then, the JVM process won&rsquo;t exit, because there is still one thread running!</div><div class="post-footer">
@@ -114,22 +119,22 @@ We created an executorService with 1 core thread in a class. We did not set allo
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/deltalake/">Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-08-12">2022-08-12</time></span></div><div class="content">Read/write performance for cloud object store.
- Each read operation usually incurs at least 5–10 ms of base latency, and can then read data at roughly 50–100 MB/s, so an operation needs to read at least several hundred kilobytes to achieve at least half the peak throughput for sequential reads, and multiple megabytes to approach the peak throughput.
-  The VM types most frequently used for analytics on AWS have at least 10 Gbps network bandwidth, so they need to run 8–10 reads in parallel to fully utilize this bandwidth.</div><div class="post-footer">
+Each read operation usually incurs at least 5–10 ms of base latency, and can then read data at roughly 50–100 MB/s, so an operation needs to read at least several hundred kilobytes to achieve at least half the peak throughput for sequential reads, and multiple megabytes to approach the peak throughput.
+The VM types most frequently used for analytics on AWS have at least 10 Gbps network bandwidth, so they need to run 8–10 reads in parallel to fully utilize this bandwidth.</div><div class="post-footer">
         <a href="/deltalake/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/paper/">paper</a>,&nbsp;<a href="/tags/cloud-storage/">cloud storage</a>,&nbsp;<a href="/tags/delta-lake/">delta lake</a>,&nbsp;<a href="/tags/acid/">ACID</a>,&nbsp;<a href="/tags/transaction/">transaction</a>,&nbsp;<a href="/tags/database/">Database</a>,&nbsp;<a href="/tags/big-data/">big data</a>,&nbsp;<a href="/tags/databrick/">databrick</a>,&nbsp;<a href="/tags/vldb/">vldb</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/cachelib/">The CacheLib Caching Engine: Design and Experiences at Scale</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-07-29">2022-07-29</time></span></div><div class="content">CacheLib is a general-purpose caching engine, designed based on experiences with a range of caching use cases at Facebook, that facilitates the easy development and maintenance of caches.
-  CacheLib was first deployed at Facebook in 2017 and today powers over 70 services including CDN, storage, and application-data caches.
-  All of these systems process millions of queries per second, cache working sets large enough to require using both flash and DRAM for caching, and must tolerate frequent restarts due to application updates, which are common in the Facebook production environment.</div><div class="post-footer">
+CacheLib was first deployed at Facebook in 2017 and today powers over 70 services including CDN, storage, and application-data caches.
+All of these systems process millions of queries per second, cache working sets large enough to require using both flash and DRAM for caching, and must tolerate frequent restarts due to application updates, which are common in the Facebook production environment.</div><div class="post-footer">
         <a href="/cachelib/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/paper/">paper</a>,&nbsp;<a href="/tags/facebook/">Facebook</a>,&nbsp;<a href="/tags/caching/">caching</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/dynamodb/">Amazon DynamoDB: A Scalable, Predictably Performant, and Fully Managed NoSQL Database Service</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-07-16">2022-07-16</time></span></div><div class="content">Hundreds of thousands of customers rely on DynamoDB for its fundamental properties
-  In 2021, during the 66-hour Amazon Prime Day shopping event, Amazon systems - including Alexa, the Amazon.com sites, and Amazon fulfillment centers, made trillions of API calls to DynamoDB, peaking at 89.2 million requests per second, while experiencing high availability with single-digit millisecond performance.
-  For DynamoDB customers, consistent performance at any scale is often more important than median request service times because unexpectedly high latency requests can amplify through higher layers of applications that depend on DynamoDB and lead to a bad customer experience.</div><div class="post-footer">
+In 2021, during the 66-hour Amazon Prime Day shopping event, Amazon systems - including Alexa, the Amazon.com sites, and Amazon fulfillment centers, made trillions of API calls to DynamoDB, peaking at 89.2 million requests per second, while experiencing high availability with single-digit millisecond performance.
+For DynamoDB customers, consistent performance at any scale is often more important than median request service times because unexpectedly high latency requests can amplify through higher layers of applications that depend on DynamoDB and lead to a bad customer experience.</div><div class="post-footer">
         <a href="/dynamodb/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/paper/">paper</a>,&nbsp;<a href="/tags/nosql/">NoSQL</a>,&nbsp;<a href="/tags/aws/">AWS</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
@@ -137,52 +142,6 @@ We created an executorService with 1 core thread in a class. We did not set allo
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-06-13">2021-06-13</time></span></div><div class="content">I finished reading Andrew Grove&rsquo;s book on ``High Output Management&rsquo;&rsquo; and really liked it, especially when reading the second half. It explains a few concepts, such as how a person&rsquo;s needs may change and what is controlling a person&rsquo;s behavior. It also contains quite a few practical advices on how to handle issues that could happen in a workplace. I highly recommend everyone to take a look at this book.</div><div class="post-footer">
         <a href="/high-output-management/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/book-review/">book review</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/keyvalue-workloads/">Key Value Workloads</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-03-05">2021-03-05</time></span></div><div class="content">YCSB    Workload Description Example Operation breakdown     A Update heavy workload session store recording recent actions read: 50%, update: 50%   B read mostly workload photo tagging; add a tag is an update, but most operations are to read tags read: 95%, update: 5%   C read only user profile cache, where profiles are constructed elsewhere )e.g., Hadoop) read: 100%   D read latest workload user status updates; people want to read the latest read: 95%, insert 5%   E short ranges threaded conversations, where each scan is for the posts in a given thread (assumed to be clustered by thread id) scan: 95% (maxscanlength=100), insert: 5   F read-modify-write workload user database, where user records are read and modified by the user or to record user activity.</div><div class="post-footer">
-        <a href="/keyvalue-workloads/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/keyvalue/">keyvalue</a>,&nbsp;<a href="/tags/workload/">workload</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/keyvalue/">Key Value Systems</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-03-01">2021-03-01</time></span></div><div class="content">LSM-tree survey WiscKey: key/value separation HashKV: store cold keys separately. LSM-trie PebblesDB KVell Skip-Tree: put kv items directly to non-adjacent layers (skipping some intermediate layers) to reduce write amplification from level-to-level data compaction. TRIAD: separate hot keys from cold keys. hot keys are stored in memtable for as long as possible. Use multiple memtables and flush them at once to disk. Pipelined Compaction Procedure: A compaction contains three phases: read phase, merge-sort phase, and write phase.</div><div class="post-footer">
-        <a href="/keyvalue/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/keyvalue/">keyvalue</a>,&nbsp;<a href="/tags/paper/">paper</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/idea-repository/">Idea Repository</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-02-22">2021-02-22</time></span></div><div class="content">List of ideas to explore.
-  Interaction between a filesystem and a computational SSD that does transparent compression.
- Problem: How to manage SSD space in this case? What API should be use? Can use SSDSim to explore the design space.    Key prefix compression in k/v store
- Problem: in levelDB, it uses fixed-size key prefix compression. Can we do better than this? In Rockset/Foundationdb, secondary indexes are stored as &lt;key, null&gt; key/value pairs.</div><div class="post-footer">
-        <a href="/idea-repository/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/idea/">idea</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/prefix-vs-postfix/">Use Prefix Operators (++i) vs. Postfix Operators (i++)</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-02-05">2021-02-05</time></span></div><div class="content">The ``C++ Primer&rsquo;&rsquo; book has a very interesting recommendation to use postfix operators, only when necessary (on page 148 for the 5th version).
-The authors shared the following in their book.
- The prefix version avoids unnecessary work. It increments the value and returns the incremented version. The postfix operator must store the original value so that it can return the unincremented value as its result.&quot;
-For ints and pointers, the compiler can optimize away this extra work.</div><div class="post-footer">
-        <a href="/prefix-vs-postfix/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/coding/">coding</a>,&nbsp;<a href="/tags/c/c&#43;&#43;/">C/C&#43;&#43;</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/crash-recovery/">Crash Recovery</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-01-23">2021-01-23</time></span></div><div class="content">The following content is selected from the Database Management Systems book, chapter 18.
-ARIES  Three main principles lie behind the ARIES recovery algorithm:
- Write-Ahead Logging: Any change to a database object is first recorded in the log; the record in the log must be written to stable storage before the change to the database object is written to disk. Repeating History During Redo: On restart following a crash, ARIES retraces all actions of the DBMS before the crash and brings the system back to the exact state that it was in at the time of the crash.</div><div class="post-footer">
-        <a href="/crash-recovery/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/note/">note</a>,&nbsp;<a href="/tags/transaction/">transaction</a>,&nbsp;<a href="/tags/crash-recovery/">crash recovery</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/secondary-index-kv-store/">Secondary Index Built on top of a Key-value Store</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-01-17">2021-01-17</time></span></div><div class="content">Key-value stores such as RocksDB have been used as the storage engine in several databases (MySQL/Mongo/Rockset/FoundationDB). A database typically requires support of secondary indexes. To support secondary index, a common approach is to store the secondary index as yet another key-value pairs. Let&rsquo;s take a look at the following example.
-Employee table    userid (primary key) salary age     Alice 40000 30   Bob 20000 23   Charlie 30000 30   David 20000 25    To store the user table, we can store each record using tableName,primary_key -&gt; salary,age as key/value pairs.</div><div class="post-footer">
-        <a href="/secondary-index-kv-store/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/idea/">idea</a>,&nbsp;<a href="/tags/note/">note</a>,&nbsp;<a href="/tags/key-value/">key-value</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/enduring-ideas/">Enduring Ideas/Techniques that are still in use today</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xing Lin</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-01-15">2021-01-15</time></span></div><div class="content">There are a few ideas/techniques that were invented a long time ago but they are being used/re-implemented again and again, even in today&rsquo;s sytems. Why do people look and reimplement these techniques, even after 50 years? Because, even after 50 years, we face largely the same problem when we design new systems.
-Here are a few examples.
-   Ideas First-time Introduced What problem is solved?     Trasactions  Make it easy to develop on top of a data store.</div><div class="post-footer">
-        <a href="/enduring-ideas/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/techniques/">techniques</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -199,11 +158,11 @@ Here are a few examples.
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/5/">5</a>
+                        <a href="/page/9/">9</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Xing Lin</a></span></div>
         </div>
     </footer></div>
