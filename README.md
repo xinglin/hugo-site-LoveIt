@@ -11,7 +11,7 @@ mv xinglin.github.io public
 % make changes. 
 % e.g., add a new post into exampleSite/content/posts/
 
-exampleSite/commit.sh "Added a new post"
+cd exampleSite; commit.sh "Added a new post"
 
 ```
 
