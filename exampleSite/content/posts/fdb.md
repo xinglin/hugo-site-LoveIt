@@ -7,6 +7,8 @@ tags = [
     "KV", 
     "2021",
     "SIGMOD",
+    "DB",
+    "transaction"
 ] 
 date = "2026-05-24" 
 +++
