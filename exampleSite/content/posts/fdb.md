@@ -45,5 +45,15 @@ continuously pull mutation logs from LogServers and apply com-
 mitted updates to disks.
 ```
 
+
+```
+In the transaction management system of FDB, we handle all failures through the
+recovery path: instead of fixing all possible failure scenarios, the transaction system proactively shuts down when it
+detects a failure. As a result, all failure handling is reduced
+to a single recovery operation, which becomes a common
+and well-tested code path. Such error handling strategy is
+desirable as long as the recovery is quick, and pays dividends
+by simplifying the normal transaction processing.
+```
 > 5 sec MVCC transaction window: every transaction has to complete in 5 secs. Main reason is then resolver only need to keey the most recent 5-sec updates in memory to detect conflicts among trasactions. 
 
