@@ -45,6 +45,34 @@ continuously pull mutation logs from LogServers and apply com-
 mitted updates to disks.
 ```
 
+```
+Divide the key space into ranges. key ranges are assigned/partitioned among resolvers. 
+For each key range, resolver stores its last commit version. 
+For a pending transaction, get key ranges for each read key. 
+check against the last commit version for each key range. 
+if the read version is smaller than any of the last commit version of any read key range, we have a read-write conflict (read value can be stale). mark this transaction as failed. 
+Otherwise, this transaction can be committed. 
+update the last commit version of that key range to the commit version of the current transaction.  
+```
+
+
+```
+ At 1 million versions per sec, using a signed int64, we can support ~300,000 years. When we have more than 1 millions transactions per sec, proxy uses batches: assign the same transaction ID for a batch of transactions. 
+
+Transaction batching. To amortize the cost of committing transactions, the Proxy groups multiple transactions received from clients
+into one batch, asks for a single commit version from the Sequencer,
+and sends the batch to Resolvers for conflict detection. 
+The resolver evaluates each transaction in the batch one at a time in strict order. 
+If transaction B after A (both from the same batch) has a conflict with A, B will be marked as failed transaction.  
+The Proxy then writes committed transactions in the batch to LogServers.
+The transaction batching reduces the number of calls to obtain a
+commit version from the Sequencer, allowing Proxies to commit
+tens of thousands of transactions per second without significantly
+impacting the Sequencer’s performance. Additionally, the batch-
+ing degree is adjusted dynamically, shrinking when the system is
+lightly loaded to improve commit latency, and increasing when the
+system is busy in order to sustain high commit throughput.
+```
 
 ```
 In the transaction management system of FDB, we handle all failures through the
@@ -54,6 +82,13 @@ to a single recovery operation, which becomes a common
 and well-tested code path. Such error handling strategy is
 desirable as long as the recovery is quick, and pays dividends
 by simplifying the normal transaction processing.
+```
+
+## Simulation Testing
+```
+- Flow: the underlying runtime engine can be swapped with a simulated implementation from a real implementation. 
+- Everything runs in a single thread, with the seed determines the code path. With different seed values, different executions (disk IO/packets delays, etc) will happen. Virtual time. can jump directly to next timestamp.
+- Buggify MACRO: developers can add buggy cases into source code and it will be triggered probabilistically. 
 ```
 > 5 sec MVCC transaction window: every transaction has to complete in 5 secs. Main reason is then resolver only need to keey the most recent 5-sec updates in memory to detect conflicts among trasactions. 
 
