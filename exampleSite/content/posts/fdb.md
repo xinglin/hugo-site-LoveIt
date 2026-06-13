@@ -10,7 +10,7 @@ tags = [
     "DB",
     "transaction"
 ] 
-date = "2023-05-24" 
+date = "2026-05-24" 
 +++
 
 > Key and value sizes are limited to 10 KB and 100 KB respectively for better performance. Transaction size is limited to 10 MB
