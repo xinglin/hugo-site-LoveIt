@@ -1,12 +1,5 @@
-+++ 
-author = "Xing Lin"
-title = "Detect cycle in a singly linked list" 
-description = "" 
-tags = [ 
-    "programming",
-    "algorithm"] 
-date = "2020-12-10" 
-+++
+# Detect cycle in a singly linked list
+
 
 Question: given a singly linked list, detect whether it contains a cycle. 
 
@@ -27,5 +20,6 @@ A = (k-1)*L + L - B.
 ```
 - And the difference from the meeting point to the start of the cycle is also L - B. 
   So, both pointers will meet at the start of the cycle at the same time. 
+
 
 
